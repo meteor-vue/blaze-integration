@@ -1,7 +1,7 @@
 Package.describe({
-  name: 'vue-blaze-template',
+  name: 'vuejs:blaze-integration',
   version: '0.1.0',
-  summary: 'Render Blaze templates in Vue components'
+  summary: "Vue integration with Meteor's Blaze rendering engine."
 });
 
 Package.onUse(function(api) {
@@ -12,7 +12,8 @@ Package.onUse(function(api) {
     'blaze',
     'templating',
     'ejson',
-    'underscore'
+    'underscore',
+    'peerlibrary:data-lookup@0.1.0'
   ]);
 
   api.use([
