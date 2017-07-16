@@ -17,8 +17,8 @@ Package.onUse(function(api) {
   ]);
 
   api.use([
-    'akryum:vue-router',
-    'akryum:vue-router2'
+    'akryum:vue-router@0.2.2',
+    'akryum:vue-router2@0.1.0'
   ], {weak: true});
 
   api.mainModule('main.js', 'client');
