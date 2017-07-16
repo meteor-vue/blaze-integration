@@ -68,7 +68,7 @@ export default {
         this.blazeView = null;
       }
 
-      // To make it available before we start rendering ther Blaze template.
+      // To make it available before we start rendering the Blaze template.
       this.updateSlot();
 
       const vm = this;
