@@ -5,7 +5,7 @@ import {EJSON} from 'meteor/ejson';
 const templateTypes = [String, Object];
 
 function normalizeVnode(vnode) {
-  vnode = _.pick(vnode, 'children', 'tag', 'key', 'isComment', 'isStatic', 'text', 'raw', 'ns', 'data');
+  vnode = _.pick(vnode, 'children', 'tag', 'key', 'isComment', 'isStatic', 'text', 'raw', 'ns', 'data', 'componentOptions');
   vnode.children = _.map(vnode.children, normalizeVnode);
   vnode.data = _.omit(vnode.data, 'hook', 'on', 'pendingInsert');
   return vnode;
