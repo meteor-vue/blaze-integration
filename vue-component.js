@@ -33,20 +33,17 @@ Template.VueComponent.onRendered(function () {
     if (component) {
       const el = document.createElement('div');
       this.view._domrange.parentElement.insertBefore(el, this.view.lastNode());
-      // Most options are non-reactive.
-      const data = Tracker.nonreactive(() => Template.currentData(this.view));
-      this.vm = new Vue({
+      // Initial set of non-reactive props.
+      const propsData = Tracker.nonreactive(() => DataLookup.lookup(Template.currentData(this.view), 'props'));
+      this.vm = new component({
         el,
-        render: (createElement) => {
-          return createElement(component, data);
-        }
+        propsData
       });
-      this.childVm = this.vm.$children[0];
       // But for props we want reactivity.
       this.autorun((computation) => {
         const props = DataLookup.get(() => Template.currentData(this.view), 'props', EJSON.equals) || {};
-        _.each(_.keys(this.childVm._props || {}), (key, i) => {
-          this.childVm._props[key] = props[key];
+        _.each(_.keys(this.vm._props || {}), (key, i) => {
+          this.vm._props[key] = props[key];
         });
       });
     }
