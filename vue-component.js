@@ -39,9 +39,13 @@ Template.VueComponent.onRendered(function () {
       // Initial set of non-reactive props.
       const propsData = Tracker.nonreactive(() => DataLookup.lookup(Template.currentData(this.view), 'props'));
 
-      this.vm = new component({
-        el,
-        propsData,
+      // To prevent unnecessary reruns of the autorun if constructor registers any dependency.
+      // The only dependency we care about is on "component" which has already been established.
+      this.vm = Tracker.nonreactive(() => {
+        return new component({
+          el,
+          propsData,
+        });
       });
 
       // And now observe props and update them if they change.
