@@ -41,7 +41,7 @@ Template.VueComponent.onRendered(function () {
 
       this.vm = new component({
         el,
-        propsData
+        propsData,
       });
 
       // And now observe props and update them if they change.
