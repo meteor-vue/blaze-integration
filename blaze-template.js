@@ -43,7 +43,7 @@ export default {
   methods: {
     getTemplate() {
       let template = this.template;
-      if (typeof template === 'string') {
+      if (_.isString(template)) {
         template = Blaze._getTemplate(template, null);
       }
 
