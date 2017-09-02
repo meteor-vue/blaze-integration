@@ -31,6 +31,10 @@ Template.VueComponent.onRendered(function () {
       component = Vue.extend(component);
     }
 
+    // Extra arguments to be passed to the component's constructor.
+    // Any change in them recreate the whole component.
+    let args = DataLookup.get(() => Template.currentData(this.view), 'args', EJSON.equals) || {};
+
     if (component) {
       // It can be any element, because it gets replaced by Vue.
       const el = document.createElement('div');
@@ -42,10 +46,10 @@ Template.VueComponent.onRendered(function () {
       // To prevent unnecessary reruns of the autorun if constructor registers any dependency.
       // The only dependency we care about is on "component" which has already been established.
       this.vm = Tracker.nonreactive(() => {
-        return new component({
+        return new component(_.extend({
           el,
           propsData,
-        });
+        }, args));
       });
 
       // And now observe props and update them if they change.

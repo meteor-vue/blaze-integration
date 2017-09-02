@@ -89,6 +89,10 @@ From Blaze, you can render Vue components with `VueComponent` Blaze template:
 This example also binds props to the component. So you can pass data from Blaze to Vue component.
 Reactively, by having `props` reactively change.
 
+If you have to provide any extra arguments to the component's constructor, you can do that
+using `args`. For example, `args` value could be `{store}`, to pass
+[Vuex store](https://vuex.vuejs.org/en/) to the component.
+
 RouterLink
 ----------
 
