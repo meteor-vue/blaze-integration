@@ -41,7 +41,7 @@ Template.VueComponent.onRendered(function () {
       this.view._domrange.parentElement.insertBefore(el, this.view.lastNode());
 
       // Initial set of non-reactive props.
-      const propsData = Tracker.nonreactive(() => DataLookup.lookup(Template.currentData(this.view), 'props'));
+      let propsData = Tracker.nonreactive(() => DataLookup.lookup(Template.currentData(this.view), 'props'));
 
       // To prevent unnecessary reruns of the autorun if constructor registers any dependency.
       // The only dependency we care about is on "component" which has already been established.
@@ -56,8 +56,13 @@ Template.VueComponent.onRendered(function () {
       this.autorun((computation) => {
         const props = DataLookup.get(() => Template.currentData(this.view), 'props', EJSON.equals) || {};
         _.each(_.keys(this.vm._props || {}), (key, i) => {
-          this.vm._props[key] = props[key];
+          const isDefined = !_.isUndefined(props[key]);
+          const isPreviouslyDefined = !_.isUndefined(propsData[key]);
+          if (isDefined || (!isDefined && isPreviouslyDefined)) {
+            this.vm._props[key] = props[key];
+          }
         });
+        propsData = props;
       });
     }
   });
