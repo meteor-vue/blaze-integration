@@ -57,7 +57,7 @@ Template.VueComponent.onRendered(function () {
         const props = DataLookup.get(() => Template.currentData(this.view), 'props', EJSON.equals) || {};
         _.each(_.keys(this.vm._props || {}), (key, i) => {
           const isDefined = !_.isUndefined(props[key]);
-          const isPreviouslyDefined = !_.isUndefined(propsData[key]);
+          const isPreviouslyDefined = propsData && !_.isUndefined(propsData[key]);
           if (isDefined || (!isDefined && isPreviouslyDefined)) {
             this.vm._props[key] = props[key];
           }
