@@ -24,10 +24,16 @@ Template.VueComponent.onRendered(function () {
     // Using DataLookup to depend only on "component" value from the data context.
     // We do not want to recreate the whole component unnecessarily.
     let component = DataLookup.get(() => Template.currentData(this.view), 'component', (a, b) => a === b) || null;
+    let componentName = ""; // name of component will be used in error message
+
+    // I propose to replace by condition by
+    // typeof myVar === 'string' || myVar instanceof String
     if (_.isString(component)) {
+      componentName = component;
       component = Vue.component(component);
     }
-    else {
+    else { // i propose better define this condition
+      componentName = ""; // i do not why component can be something else like string
       component = Vue.extend(component);
     }
 
@@ -59,6 +65,8 @@ Template.VueComponent.onRendered(function () {
           this.vm._props[key] = props[key];
         });
       });
+    } else {
+        throw new Error(`Component ${componentName} not found by Vue.component method`);
     }
   });
 });
