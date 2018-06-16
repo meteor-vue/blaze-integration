@@ -26,6 +26,9 @@ Template.VueComponent.onRendered(function () {
     let component = DataLookup.get(() => Template.currentData(this.view), 'component', (a, b) => a === b) || null;
     if (_.isString(component)) {
       component = Vue.component(component);
+      if(typeof component === "undefined") {
+        throw new Error("This package is not compatible with Vue.js 2.x, you should use Vue.js 1.x");
+      }
     }
     else {
       component = Vue.extend(component);
