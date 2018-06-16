@@ -1,4 +1,4 @@
-Vue and Blaze integration
+Vue 1.x and Blaze integration
 =========================
 
 This Meteor package provides Vue components and Blaze templates for easier integration of [Vue](https://vuejs.org/)
@@ -12,6 +12,8 @@ Adding this package to your Meteor application provides:
 **You have to use [Tracker-enabled fork of Vue](https://github.com/meteor-vue/vue) and
 [fork of Tracker](https://github.com/meteor-vue/tracker).**
 See [these instructions for more information](https://github.com/meteor-vue/guide).
+
+**This package do not provide support for Vue.js 2.x**
 
 Installation
 ------------
