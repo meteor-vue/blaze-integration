@@ -8,6 +8,10 @@ function topView(view) {
   return view;
 }
 
+const routerLinkOptions = [
+  'to', 'replace', 'append', 'tag', 'active-class', 'exact', 'event', 'exact-active-class',
+];
+
 Template.RouterLink.helpers({
   href() {
     const vm = topView(Template.instance().view);
@@ -15,7 +19,15 @@ Template.RouterLink.helpers({
     const args = Template.currentData();
     const {href} = vm.$router.resolve(args.to, current, args.append);
     return href;
-  }
+  },
+  attributes() {
+    const args = Template.currentData();
+    return Object.keys(args)
+      .filter(argName => routerLinkOptions.indexOf(argName) === -1)
+      .reduce((attrs, key) => {
+        return Object.assign(attrs, { [key]: args[key] });
+      }, {});
+  },
 });
 
 // Taken from vue-router's router-link component's code.

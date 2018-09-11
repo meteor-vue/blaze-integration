@@ -108,3 +108,9 @@ This will render a link which will on click trigger page change through router.
 
 The template aims to be equivalent to [`<router-link>` Vue component](https://router.vuejs.org/en/api/router-link.html).
 For example, you can pass as `to` an object which will be resolved to the target location.
+
+It also supports adding attributes, you can add any attribue that is not known as an option for [`<router-link>` Vue component](https://router.vuejs.org/en/api/router-link.html).
+
+```handlebars
+{{#RouterLink to="/" class="my-class" data-my-info="{info: true}"}}
+```
