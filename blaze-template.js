@@ -93,7 +93,8 @@ export default {
                   _.each(newVnodes, function (vnode, i, list) {
                     // We prepend rendered vnodes before "lastNode" in order.
                     // So rendered content is in fact between "firstNode" and "lastNode".
-                    vm.__patch__(null, vnode, false, false, view._domrange.parentElement, view.lastNode());
+                    const el = vm.__patch__(null, vnode, false, false);
+                    view._domrange.parentElement.insertBefore(el, view.lastNode());
                   });
                 }
                 else {
