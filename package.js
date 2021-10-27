@@ -1,6 +1,6 @@
 Package.describe({
   name: 'vuejs:blaze-integration',
-  version: '0.3.0',
+  version: '0.3.1',
   summary: "Vue integration with Meteor's Blaze rendering engine."
 });
 
